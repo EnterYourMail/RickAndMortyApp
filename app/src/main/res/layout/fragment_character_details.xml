@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.character_details.CharacterDetailsFragment">
+
+    <ImageView
+        android:id="@+id/characters_details_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_default"
+        android:contentDescription="@string/character_details_image_description"
+        android:minWidth="@dimen/image_min_width_height"
+        android:minHeight="@dimen/image_min_width_height"
+        android:textColorHint="@color/characters_details_text_color_hint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_toolbar" />
+
+    <!--android:src="@drawable/ic_launcher_background" -->
+
+    <TextView
+        android:id="@+id/characters_details_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:hint="@string/character_details_name_hint"
+        android:textColorHint="@color/characters_details_text_color_hint"
+        app:layout_constraintStart_toEndOf="@+id/characters_details_image"
+        app:layout_constraintTop_toTopOf="@+id/characters_details_image" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/characters_details_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/characters_details_location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:hint="@string/character_details_location_hint"
+        android:textColorHint="@color/characters_details_text_color_hint"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_name_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_name_text" />
+
+    <TextView
+        android:id="@+id/characters_details_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:hint="@string/character_details_type_hint"
+        android:textColorHint="@color/characters_details_text_color_hint"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_location_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_location_text" />
+
+    <TextView
+        android:id="@+id/characters_details_status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:hint="@string/character_details_status_hint"
+        android:textColorHint="@color/characters_details_text_color_hint"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_type_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_type_text" />
+
+    <Button
+        android:id="@+id/characters_details_episodes_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:text="@string/character_details_episodes_button_caption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_status_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

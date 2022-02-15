@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RickAndMortyApp</string>
+    <string name="character_details_image_description">Character image</string>
+    <string name="character_details_name_hint">Name</string>
+    <string name="character_details_location_hint">Location</string>
+    <string name="character_details_type_hint">Type</string>
+    <string name="character_details_status_hint">Status</string>
+    <string name="character_details_episodes_button_caption">Episodes</string>
 </resources>
