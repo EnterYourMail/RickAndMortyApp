@@ -1,5 +1,6 @@
 package com.example.rickandmortyapp.di
 
+import com.example.rickandmortyapp.ui.characters.CharactersFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,5 +13,5 @@ interface AppComponent {
         fun create(): AppComponent
     }
 
-
+    fun inject(fragment: CharactersFragment)
 }

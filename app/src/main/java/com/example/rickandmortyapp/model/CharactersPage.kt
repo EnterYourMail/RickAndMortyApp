@@ -1,6 +1,6 @@
 package com.example.rickandmortyapp.model
 
-data class Characters(
+data class CharactersPage(
     val pagesInfo: PagesInfo,
     val result: List<Character>
 )

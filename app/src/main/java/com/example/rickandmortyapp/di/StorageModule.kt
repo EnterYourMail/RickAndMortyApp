@@ -1,5 +1,6 @@
 package com.example.rickandmortyapp.di
 
+import com.example.rickandmortyapp.api.RickAndMortyApi
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
@@ -20,7 +21,7 @@ class StorageModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideRickAndMortyApi(): RickAndMortyApi {
         val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
             setLevel(HttpLoggingInterceptor.Level.BODY)
         }
@@ -33,6 +34,7 @@ class StorageModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
+            .create(RickAndMortyApi::class.java)
     }
 
     /*@Singleton
