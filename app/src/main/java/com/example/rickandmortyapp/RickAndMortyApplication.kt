@@ -5,5 +5,5 @@ import com.example.rickandmortyapp.di.AppComponent
 import com.example.rickandmortyapp.di.DaggerAppComponent
 
 class RickAndMortyApplication: Application() {
-    val appComponent: AppComponent by lazy { DaggerAppComponent.factory().create() }
+    val appComponent: AppComponent by lazy { DaggerAppComponent.create() }
 }

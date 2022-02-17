@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.RickAndMortyApp.Body2" parent="TextAppearance.MaterialComponents.Body2">
+    </style>
+    <style name="TextAppearance.RickAndMortyApp.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+    </style>
+    <style name="TextAppearance.RickAndMortyApp.Caption" parent="TextAppearance.MaterialComponents.Caption">
+    </style>
+
+    <style name="ShapeAppearance.RickAndMortyApp.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+</resources>

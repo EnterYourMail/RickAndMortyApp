@@ -11,12 +11,16 @@ class CharactersPagingSource(private val service: RickAndMortyApi) :
     PagingSource<Int, Character>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
-        val position = params.key ?: 0
+        val position = params.key ?: 1
         return try {
             val response = service.charactersPage(position)
-            val nextKey = response.pagesInfo.next?.let { position + 1 }
-            val prevKey = response.pagesInfo.prev?.let { position - 1 }
-            LoadResult.Page(response.result, nextKey, prevKey)
+            val nextKey = response.info.next?.let { position + 1 }
+            val prevKey = response.info.prev?.let { position - 1 }
+            LoadResult.Page(
+                data = response.results,
+                prevKey = prevKey,
+                nextKey = nextKey
+            )
         } catch (e: IOException) {
             LoadResult.Error(e)
         } catch (e: HttpException) {

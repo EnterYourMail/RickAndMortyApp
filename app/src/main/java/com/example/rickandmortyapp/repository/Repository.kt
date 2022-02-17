@@ -13,7 +13,7 @@ class Repository @Inject constructor(private val service: RickAndMortyApi) {
     fun characters(): Flow<PagingData<Character>> {
         return Pager(
             config = PagingConfig(
-                service.itemsAtPage(),
+                pageSize = ITEMS_AT_PAGE,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { CharactersPagingSource(service) }
@@ -22,4 +22,8 @@ class Repository @Inject constructor(private val service: RickAndMortyApi) {
     suspend fun characterDetails(id: Int) = service.characterDetails(id)
 
     suspend fun episodes(arrayString: String) = service.multipleEpisodes(arrayString)
+
+    companion object {
+        const val ITEMS_AT_PAGE = 20
+    }
 }

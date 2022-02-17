@@ -12,16 +12,10 @@ interface RickAndMortyApi {
     @GET("character")
     suspend fun charactersPage(@Query("page") page: Int = 1): CharactersPage
 
-    @GET("{id}")
+    @GET("character/{id}")
     suspend fun characterDetails(@Path("id") id: Int): CharacterDetails
 
-    suspend fun listEpisodes(list: Iterable<Int>): List<Episode> {
-        return multipleEpisodes(list.joinToString(","))
-    }
-
-    @GET("{array}")
+    @GET("episode/{array}")
     suspend fun multipleEpisodes(@Path("array") arrayString: String): List<Episode>
-
-    fun itemsAtPage() = 20
 
 }

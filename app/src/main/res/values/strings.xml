@@ -8,4 +8,7 @@
     <string name="character_details_episodes_button_caption">Episodes</string>
     <string name="character_item_image_description">Character image</string>
     <string name="character_item_name_hint">Character name</string>
+    <string name="characters_load_state_retry_button_caption">Retry</string>
+    <string name="episode_item_name_hint">Episode\'s name</string>
+    <string name="episode_item_air_date_hint">Episode\'s air date</string>
 </resources>
