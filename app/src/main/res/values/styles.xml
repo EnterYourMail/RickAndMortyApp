@@ -7,9 +7,20 @@
     <style name="TextAppearance.RickAndMortyApp.Caption" parent="TextAppearance.MaterialComponents.Caption">
     </style>
 
+    <!-- It doesn't work. I have to set individual style for CardView instead. -->
     <style name="ShapeAppearance.RickAndMortyApp.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerFamily">cut</item>
+        <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
     </style>
 
+    <!-- Style for CharacterCardView -->
+    <style name="ShapeAppearance.RickAndMortyApp.CharacterCardView" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cardCornerRadius">8dp</item>
+    </style>
+
+    <style name="MyToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+        <item name="background">?attr/colorPrimary</item>
+        <item name="colorControlNormal">?attr/colorOnPrimary</item>
+    </style>
 </resources>

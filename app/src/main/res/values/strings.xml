@@ -11,4 +11,8 @@
     <string name="characters_load_state_retry_button_caption">Retry</string>
     <string name="episode_item_name_hint">Episode\'s name</string>
     <string name="episode_item_air_date_hint">Episode\'s air date</string>
+    <string name="character_details_error_hint">Error message</string>
+    <string name="character_details_retry_button_caption">Retry</string>
+
+    <string name="error_caption">Error: %1$s</string>
 </resources>

@@ -1,38 +1,44 @@
 package com.example.rickandmortyapp.ui.character_details
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmortyapp.model.CharacterDetails
 import com.example.rickandmortyapp.repository.Repository
+import com.example.rickandmortyapp.utils.ScreenState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
-class CharacterDetailsViewModel(repository: Repository, id: Int) : ViewModel() {
+class CharacterDetailsViewModel @AssistedInject constructor(
+    private val repository: Repository,
+    @Assisted private val id: Int
+) : ViewModel() {
 
-    val viewState = flow { emit(repository.characterDetails(id)) }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), CharacterDetails())
+    val viewState: StateFlow<ScreenState<CharacterDetails>>
+        get() = _viewState
+    private val _viewState = MutableStateFlow<ScreenState<CharacterDetails>>(
+        ScreenState.Loading
+    )
 
-    @AssistedFactory
-    interface AssistedViewModelFactory {
-        fun create(id: Int): Factory
+    init {
+        retry()
     }
 
-    class Factory @AssistedInject  constructor(
-        private val repository: Repository,
-        @Assisted private val id: Int) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            @Suppress("UNCHECKED_CAST")
-            if (modelClass.isAssignableFrom(CharacterDetailsViewModel::class.java)) {
-                return CharacterDetailsViewModel(repository, id) as T
-            } else {
-                throw IllegalArgumentException("Unknown ViewModel class!")
-            }
+    fun retry() {
+        viewModelScope.launch {
+            _viewState.emit(ScreenState.Loading)
+            delay(1000) // For test
+            _viewState.emit(repository.characterDetails(id))
         }
     }
+
+    @AssistedFactory
+    interface Factory {
+        fun get(id: Int): CharacterDetailsViewModel
+    }
+
 }

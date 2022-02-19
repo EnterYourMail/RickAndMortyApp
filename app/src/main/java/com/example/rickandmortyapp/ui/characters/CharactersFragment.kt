@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -19,16 +18,18 @@ import com.example.rickandmortyapp.databinding.FragmentCharactersBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Provider
 
 
 class CharactersFragment : BaseFragment() {
 
+/*    @Inject
+    internal lateinit var viewModelFactory: CharactersViewModel.Factory
+    private val viewModel by viewModels<CharactersViewModel> { viewModelFactory }*/
     @Inject
-    lateinit var charactersAdapterFactory: CharactersAdapter.AssistedAdapterFactory
-    @Inject
-    lateinit var viewModelFactory: CharactersViewModel.Factory
+    internal lateinit var viewModelProvider: Provider<CharactersViewModel>
+    private val viewModel by viewModels { viewModelProvider.get() }
 
-    private val viewModel: CharactersViewModel by viewModels { viewModelFactory }
     private lateinit var binding: FragmentCharactersBinding
     private lateinit var charactersAdapter: CharactersAdapter
 
@@ -49,6 +50,7 @@ class CharactersFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCharactersBinding.bind(view)
+
         initToolbar(binding.charactersToolbar, false)
         initCharacterList(binding.charactersList)
 
@@ -62,7 +64,8 @@ class CharactersFragment : BaseFragment() {
     }
 
     private fun initCharacterList(charactersList: RecyclerView) {
-        charactersAdapter = charactersAdapterFactory.create { navigateToCharacterDetails(it) }
+        charactersList.setInserts(bottom=true)
+        charactersAdapter = CharactersAdapter { navigateToCharacterDetails(it) }
 
         charactersList.apply {
             layoutManager = GridLayoutManager(context, 2)

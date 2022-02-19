@@ -32,7 +32,7 @@
         android:label="fragment_episodes"
         tools:layout="@layout/fragment_episodes" >
         <argument
-            android:name="stringEpisodes"
-            app:argType="string" />
+            android:name="episodesArray"
+            app:argType="integer[]" />
     </fragment>
 </navigation>

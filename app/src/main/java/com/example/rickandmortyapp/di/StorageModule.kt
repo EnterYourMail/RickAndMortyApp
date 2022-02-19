@@ -1,7 +1,6 @@
 package com.example.rickandmortyapp.di
 
 import com.example.rickandmortyapp.api.RickAndMortyApi
-import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -12,12 +11,6 @@ import javax.inject.Singleton
 
 @Module
 class StorageModule {
-
-    @Singleton
-    @Provides
-    fun providePicasso():Picasso {
-        return Picasso.get()
-    }
 
     @Singleton
     @Provides
