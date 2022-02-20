@@ -20,7 +20,6 @@
 
     <style name="MyToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="titleTextColor">?attr/colorOnPrimary</item>
-        <item name="background">?attr/colorPrimary</item>
-        <item name="colorControlNormal">?attr/colorOnPrimary</item>
+        <!--<item name="background">?attr/colorPrimary</item>-->
     </style>
 </resources>

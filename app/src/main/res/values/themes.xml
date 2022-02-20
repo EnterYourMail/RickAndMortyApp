@@ -1,4 +1,4 @@
-<resources>
+<resources  xmlns:tools="http://schemas.android.com/tools">>
     <!-- Base application theme. -->
     <style name="Theme.RickAndMortyApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -10,26 +10,25 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <!-- <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item> -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <!--  -->
-        <item name="colorSurface">@color/white</item>
-        <item name="android:colorBackground">@color/gray_200</item>
 
-        <!--
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        -->
-        <!--
+
+        <item name="colorSurface">@color/white</item>
+        <item name="android:colorBackground">@color/gray_200</item>
+        <item name="colorControlNormal">?attr/colorOnPrimary</item>
         <item name="toolbarStyle">@style/MyToolbar</item>
-         -->
+
+        <!--
         <item name="android:navigationBarColor">
             @android:color/transparent
         </item>
 
         <item name="android:statusBarColor">
             @android:color/transparent
-        </item>
+        </item> -->
 
         <!-- CardView is a medium component, but it doesn't work.
              So, I have to set individual style for CardView instead.

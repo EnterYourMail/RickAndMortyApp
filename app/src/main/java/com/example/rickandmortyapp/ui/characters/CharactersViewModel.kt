@@ -11,13 +11,28 @@ class CharactersViewModel @Inject constructor(repository: Repository) :
 
     val characters = repository.characters().cachedIn(viewModelScope)
 
-    /*class Factory @Inject constructor(private val repository: Repository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass == CharactersViewModel::class.java) {
-                @Suppress("UNCHECKED_CAST")
-                return CharactersViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
+    /*val screenState: StateFlow<ScreenState<Int>>
+        get() = _screenState
+    private val _screenState = MutableStateFlow<ScreenState<Int>>(
+        ScreenState.Loading
+    )
+
+    fun setLoadingState() {
+        viewModelScope.launch {
+            _screenState.emit(ScreenState.Loading)
+        }
+    }
+
+    fun setContentState() {
+        viewModelScope.launch {
+            _screenState.emit(ScreenState.Content(0))
+        }
+    }
+
+    private fun setErrorState(e: Throwable) {
+        viewModelScope.launch {
+            _screenState.emit(ScreenState.Error(e))
         }
     }*/
+
 }

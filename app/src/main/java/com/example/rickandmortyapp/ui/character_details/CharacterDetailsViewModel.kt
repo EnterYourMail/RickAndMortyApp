@@ -8,7 +8,6 @@ import com.example.rickandmortyapp.utils.ScreenState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -18,9 +17,9 @@ class CharacterDetailsViewModel @AssistedInject constructor(
     @Assisted private val id: Int
 ) : ViewModel() {
 
-    val viewState: StateFlow<ScreenState<CharacterDetails>>
-        get() = _viewState
-    private val _viewState = MutableStateFlow<ScreenState<CharacterDetails>>(
+    val screenState: StateFlow<ScreenState<CharacterDetails>>
+        get() = _screenState
+    private val _screenState = MutableStateFlow<ScreenState<CharacterDetails>>(
         ScreenState.Loading
     )
 
@@ -30,9 +29,9 @@ class CharacterDetailsViewModel @AssistedInject constructor(
 
     fun retry() {
         viewModelScope.launch {
-            _viewState.emit(ScreenState.Loading)
-            delay(1000) // For test
-            _viewState.emit(repository.characterDetails(id))
+            _screenState.emit(ScreenState.Loading)
+            //delay(500) // For test
+            _screenState.emit(repository.characterDetails(id))
         }
     }
 

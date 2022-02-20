@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
@@ -16,6 +16,8 @@ import com.example.rickandmortyapp.base.BaseFragment
 import com.example.rickandmortyapp.databinding.FragmentEpisodesBinding
 import com.example.rickandmortyapp.model.Episode
 import com.example.rickandmortyapp.utils.ScreenState
+import com.example.rickandmortyapp.utils.setSystemInserts
+import com.xwray.groupie.GroupieAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,7 +39,7 @@ class EpisodesFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_episodes, container, false)
@@ -46,18 +48,25 @@ class EpisodesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEpisodesBinding.bind(view)
-        initToolbar(binding.episodesToolbar, false)
-        binding.episodesList.setInserts(bottom = true)
-        //TODO("Replace EpisodesAdapter to groupie")
+        initToolbar(binding.episodesToolbar)
+        binding.episodesList.setSystemInserts(bottom = true)
+
+        val adapter = GroupieAdapter()
+        binding.episodesList.adapter = adapter
         binding.episodesList.layoutManager = LinearLayoutManager(context)
+        binding.episodesRetryButton.setOnClickListener { viewModel.retry() }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.viewState.flowWithLifecycle(lifecycle, Lifecycle.State.RESUMED)
-                .collect { observeScreenState(it) }
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.screenState.collect { observeScreenState(it, adapter) }
+            }
         }
     }
 
-    private fun observeScreenState(screenState: ScreenState<List<Episode>>) {
+    private fun observeScreenState(
+        screenState: ScreenState<List<Episode>>,
+        adapter: GroupieAdapter,
+    ) {
         with(binding) {
             episodesProgressBar.isVisible = screenState is ScreenState.Loading
             episodesErrorText.isVisible = screenState is ScreenState.Error
@@ -73,7 +82,7 @@ class EpisodesFragment : BaseFragment() {
                     )
                 }
                 is ScreenState.Content -> {
-                    episodesList.adapter = EpisodesAdapter(screenState.data)
+                    adapter.update(screenState.data.map { EpisodesGroupieItem(it) })
                 }
             }
         }

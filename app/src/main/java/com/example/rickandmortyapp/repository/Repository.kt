@@ -13,13 +13,13 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val service: RickAndMortyApi) {
 
-    fun characters(): Flow<PagingData<Character>> {
+    fun characters(/*onException: (Throwable) -> Unit*/): Flow<PagingData<Character>> {
         return Pager(
             config = PagingConfig(
                 pageSize = ITEMS_AT_PAGE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { CharactersPagingSource(service) }
+            pagingSourceFactory = { CharactersPagingSource(service /*, onException*/) }
         ).flow
     }
 

@@ -8,6 +8,7 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.databinding.CharactersLoadStateItemBinding
+import com.example.rickandmortyapp.utils.setSystemInserts
 
 class CharactersLoadStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<CharactersLoadStateAdapter.CharactersLoadStateViewHolder>() {
@@ -44,6 +45,7 @@ class CharactersLoadStateAdapter(private val retry: () -> Unit) :
             binding.charactersLoadStateProgressBar.isVisible = loadState is LoadState.Loading
             binding.charactersLoadStateRetryButton.isVisible = loadState is LoadState.Error
             binding.charactersLoadStateErrorText.isVisible = loadState is LoadState.Error
+            binding.root.setSystemInserts(bottom = true)
         }
 
     }

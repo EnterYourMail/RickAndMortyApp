@@ -10,10 +10,10 @@ import javax.inject.Singleton
 @Component(modules=[StorageModule::class])
 interface AppComponent {
 
-    @Component.Factory
+    /*@Component.Factory
     interface Factory {
         fun create(): AppComponent
-    }
+    }*/
 
     fun inject(fragment: CharactersFragment)
     fun inject(fragment: CharacterDetailsFragment)

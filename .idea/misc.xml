@@ -7,14 +7,14 @@
         <entry key="app/src/main/res/drawable/ic_baseline_downloading_64.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_error_outline_64.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/character_item.xml" value="0.32864583333333336" />
+        <entry key="app/src/main/res/layout/character_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/character_item2.xml" value="0.1175925925925926" />
         <entry key="app/src/main/res/layout/characters_load_state_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/episode_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_character_details.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_characters.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_character_details.xml" value="0.15168539325842698" />
+        <entry key="app/src/main/res/layout/fragment_characters.xml" value="0.2808988764044944" />
         <entry key="app/src/main/res/layout/fragment_characters_list.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_episodes.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_episodes.xml" value="0.12658227848101267" />
       </map>
     </option>
   </component>

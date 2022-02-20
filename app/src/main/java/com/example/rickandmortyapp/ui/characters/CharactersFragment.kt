@@ -5,16 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.RickAndMortyApplication
 import com.example.rickandmortyapp.base.BaseFragment
 import com.example.rickandmortyapp.databinding.FragmentCharactersBinding
+import com.example.rickandmortyapp.utils.setSystemInserts
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,9 +25,6 @@ import javax.inject.Provider
 
 class CharactersFragment : BaseFragment() {
 
-/*    @Inject
-    internal lateinit var viewModelFactory: CharactersViewModel.Factory
-    private val viewModel by viewModels<CharactersViewModel> { viewModelFactory }*/
     @Inject
     internal lateinit var viewModelProvider: Provider<CharactersViewModel>
     private val viewModel by viewModels { viewModelProvider.get() }
@@ -41,7 +40,7 @@ class CharactersFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_characters, container, false)
@@ -51,23 +50,39 @@ class CharactersFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCharactersBinding.bind(view)
 
-        initToolbar(binding.charactersToolbar, false)
-        initCharacterList(binding.charactersList)
+        initToolbar(binding.charactersToolbar)
+        initCharactersList()
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.characters.flowWithLifecycle(lifecycle, Lifecycle.State.RESUMED)
-                .collect { pagingData ->
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.characters.collect { pagingData ->
+                    //viewModel.setContentState()
                     charactersAdapter.submitData(pagingData)
                 }
+            }
         }
-
     }
 
-    private fun initCharacterList(charactersList: RecyclerView) {
-        charactersList.setInserts(bottom=true)
+    private fun initCharactersList() {
         charactersAdapter = CharactersAdapter { navigateToCharacterDetails(it) }
+        binding.charactersRetryButton.setOnClickListener { charactersAdapter.retry() }
 
-        charactersList.apply {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                charactersAdapter.loadStateFlow.collect {
+                    binding.charactersProgressBar.isVisible = it.refresh is LoadState.Loading
+                    binding.charactersRetryButton.isVisible = it.refresh is LoadState.Error
+                    binding.charactersErrorText.isVisible = it.refresh is LoadState.Error
+                    if (it.refresh is LoadState.Error) {
+                        binding.charactersErrorText.text =
+                            (it.refresh as LoadState.Error).error.localizedMessage
+                    }
+                }
+            }
+        }
+
+        with(binding.charactersList) {
+            setSystemInserts(bottom = true)
             layoutManager = GridLayoutManager(context, 2)
             adapter = charactersAdapter.withLoadStateHeaderAndFooter(
                 header = CharactersLoadStateAdapter { charactersAdapter.retry() },

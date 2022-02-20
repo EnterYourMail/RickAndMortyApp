@@ -7,7 +7,10 @@ import com.example.rickandmortyapp.model.Character
 import retrofit2.HttpException
 import java.io.IOException
 
-class CharactersPagingSource(private val service: RickAndMortyApi) :
+class CharactersPagingSource(
+    private val service: RickAndMortyApi,
+    //private val onException: (Throwable) -> Unit
+) :
     PagingSource<Int, Character>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
@@ -22,8 +25,10 @@ class CharactersPagingSource(private val service: RickAndMortyApi) :
                 nextKey = nextKey
             )
         } catch (e: IOException) {
+            //onException.invoke(e)
             LoadResult.Error(e)
         } catch (e: HttpException) {
+            //onException.invoke(e)
             LoadResult.Error(e)
         }
     }

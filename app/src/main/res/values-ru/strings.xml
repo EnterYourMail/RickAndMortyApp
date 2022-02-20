@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="character_details_image_description">Изображение персонажа</string>
+    <string name="character_details_name_caption">Имя:</string>
+    <string name="character_details_location_caption">Местоположение:</string>
+    <string name="character_details_type_caption">Тип:</string>
+    <string name="character_details_status_caption">Статус:</string>
+
+    <string name="character_details_episodes_button_caption">Эпизоды</string>
+    <string name="character_item_image_description">Изображение персонажа</string>
+    <string name="character_item_name_hint">Имя персонажа</string>
+    <string name="characters_load_state_retry_button_caption">Повторить</string>
+    <string name="episode_item_name_hint">Название эпизода</string>
+    <string name="episode_item_air_date_hint">Дата выхода эпизода</string>
+    <string name="character_details_error_hint">Сообщение об ошибке</string>
+    <string name="character_details_retry_button_caption">Повторить</string>
+
+    <string name="error_caption">Ошибка: %1$s</string>
+    <string name="character_details_toolbar_title">Данные о персонаже</string>
+    <string name="characters_toolbar_title">Персонажи</string>
+    <string name="episodes_title">Эпизоды</string>
+</resources>

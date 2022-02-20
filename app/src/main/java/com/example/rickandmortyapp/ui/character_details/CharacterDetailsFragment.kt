@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.rickandmortyapp.R
@@ -20,7 +20,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 class CharacterDetailsFragment : BaseFragment() {
 
@@ -48,12 +47,13 @@ class CharacterDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCharacterDetailsBinding.bind(view)
-        initToolbar(binding.charactersDetailsToolbar, false)
+        initToolbar(binding.charactersDetailsToolbar)
 
         binding.characterDetailsRetryButton.setOnClickListener { viewModel.retry() }
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.viewState.flowWithLifecycle(lifecycle, Lifecycle.State.RESUMED)
-                .collect { observeScreenState(it) }
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.screenState.collect { observeScreenState(it) }
+            }
         }
     }
 
@@ -62,13 +62,10 @@ class CharacterDetailsFragment : BaseFragment() {
             characterDetailsProgressBar.isVisible = screenState is ScreenState.Loading
             characterDetailsErrorText.isVisible = screenState is ScreenState.Error
             characterDetailsRetryButton.isVisible = screenState is ScreenState.Error
-            charactersDetailsImage.isVisible = screenState is ScreenState.Content
-            charactersDetailsNameText.isVisible = screenState is ScreenState.Content
-            charactersDetailsLocationText.isVisible = screenState is ScreenState.Content
-            charactersDetailsTypeText.isVisible = screenState is ScreenState.Content
-            charactersDetailsStatusText.isVisible = screenState is ScreenState.Content
-            charactersDetailsEpisodesButton.isVisible = screenState is ScreenState.Content
+            charactersDetailsContentGroup.isVisible = screenState is ScreenState.Content
+
             when (screenState) {
+                is ScreenState.Loading -> Unit
                 is ScreenState.Error -> {
                     characterDetailsErrorText.text = getString(
                         R.string.error_caption,
@@ -76,17 +73,15 @@ class CharacterDetailsFragment : BaseFragment() {
                     )
                 }
 
-                is ScreenState.Loading -> Unit
-
                 is ScreenState.Content -> {
-                    Picasso.get().load(screenState.data.image).into(charactersDetailsImage)
+                    Picasso.get().load(screenState.data.image)
+                        .fit().centerInside().into(charactersDetailsImage)
                     charactersDetailsNameText.text = screenState.data.name
                     charactersDetailsLocationText.text = screenState.data.location.name
                     charactersDetailsTypeText.text = screenState.data.type
                     charactersDetailsStatusText.text = screenState.data.status
                     val episodesArray = screenState.data.episodesUrls.map {
-                        it.substringAfter("/episode/", "")
-                            .toInt()
+                        it.substringAfter("/episode/", "").toInt()
                     }.toIntArray()
                     binding.charactersDetailsEpisodesButton.setOnClickListener {
                         navigateToEpisodes(episodesArray)

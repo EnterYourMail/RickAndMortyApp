@@ -35,10 +35,11 @@ class CharactersAdapter(private val onClick: (Int) -> Unit) :
         fun bind(character: Character, onClick: (Int) -> Unit) = with(binding) {
             //TODO("Put screen metric to Picasso resize parameters.")
             Picasso.get().load(character.image)
-                .placeholder(R.drawable.ic_baseline_downloading_64)
-                .error(R.drawable.ic_baseline_error_outline_64)
-                .resize(300, 300)
-                .centerCrop().into(characterItemImage)
+                .placeholder(R.drawable.ic_baseline_downloading_96)
+                .error(R.drawable.ic_baseline_error_outline_96)
+                //.resize(300, 300)
+                //.fit().centerCrop()
+                .into(characterItemImage)
             characterItemNameText.text = character.name
             root.setOnClickListener { onClick.invoke(character.id) }
         }
