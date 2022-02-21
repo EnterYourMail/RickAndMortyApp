@@ -1,6 +1,7 @@
 package com.example.rickandmortyapp.ui.characters
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -83,12 +84,17 @@ class CharactersFragment : BaseFragment() {
 
         with(binding.charactersList) {
             setSystemInserts(bottom = true)
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, getSpanCount())
             adapter = charactersAdapter.withLoadStateHeaderAndFooter(
                 header = CharactersLoadStateAdapter { charactersAdapter.retry() },
                 footer = CharactersLoadStateAdapter { charactersAdapter.retry() }
             )
         }
+    }
+
+    private fun getSpanCount(): Int {
+        val orientation = resources.configuration.orientation
+        return if (orientation == Configuration.ORIENTATION_LANDSCAPE) 3 else 2
     }
 
     private fun navigateToCharacterDetails(id: Int) {
