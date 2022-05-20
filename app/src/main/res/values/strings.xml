@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">RickAndMortyApp</string>
+    <string name="app_name" translatable="false">RickAndMortyApp</string>
+    <string name="character_details_image_description">Character image</string>
+    <string name="character_details_name_hint" translatable="false">-</string>
+    <string name="character_details_location_hint" translatable="false">-</string>
+    <string name="character_details_type_hint" translatable="false">-</string>
+    <string name="character_details_status_hint" translatable="false">-</string>
+    <string name="character_details_name_caption">Name:</string>
+    <string name="character_details_location_caption">Location:</string>
+    <string name="character_details_type_caption">Type:</string>
+    <string name="character_details_status_caption">Status:</string>
+
+    <string name="character_details_episodes_button_caption">Episodes</string>
+    <string name="character_item_image_description">Character image</string>
+    <string name="character_item_name_hint">Character name</string>
+    <string name="characters_load_state_retry_button_caption">Retry</string>
+    <string name="episode_item_name_hint">Episode\'s name</string>
+    <string name="episode_item_air_date_hint">Episode\'s air date</string>
+    <string name="character_details_error_hint">Error message</string>
+    <string name="character_details_retry_button_caption">Retry</string>
+
+    <string name="error_caption">Error: %1$s</string>
+    <string name="character_details_toolbar_title">Character details</string>
+    <string name="characters_toolbar_title">Characters</string>
+    <string name="episodes_title">Episodes</string>
 </resources>

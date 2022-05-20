@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.character_details.CharacterDetailsFragment">
+
+    <!--
+    style="?android:attr/progressBarStyle"
+    app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+    android:theme="?attr/actionBarTheme"
+    -->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/characters_details_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ProgressBar
+        android:id="@+id/character_details_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_toolbar" />
+
+    <TextView
+        android:id="@+id/character_details_error_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:hint="@string/character_details_error_hint"
+        android:textColorHint="#546E7A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character_details_progress_bar" />
+
+    <Button
+        android:id="@+id/character_details_retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:text="@string/character_details_retry_button_caption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character_details_error_text" />
+
+
+    <ImageView
+        android:id="@+id/characters_details_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:contentDescription="@string/character_details_image_description"
+        android:minWidth="@dimen/image_min_width_height"
+        android:minHeight="@dimen/image_min_width_height"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/characters_details_name_text"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character_details_retry_button" />
+
+    <!--android:src="@drawable/ic_launcher_background" -->
+
+    <TextView
+        android:id="@+id/characters_details_name_caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/character_details_name_caption"
+        android:textAppearance="@style/TextAppearance.RickAndMortyApp.Caption"
+        app:layout_constraintStart_toEndOf="@+id/characters_details_image"
+        app:layout_constraintTop_toTopOf="@+id/characters_details_image" />
+
+    <TextView
+        android:id="@+id/characters_details_name_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:hint="@string/character_details_name_hint"
+        android:textAppearance="@style/TextAppearance.RickAndMortyApp.Subtitle1"
+        android:textColorHint="#546E7A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/characters_details_image"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_name_caption" />
+
+
+    <TextView
+        android:id="@+id/characters_details_location_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:text="@string/character_details_location_caption"
+        android:textAppearance="@style/TextAppearance.RickAndMortyApp.Caption"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_name_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_name_text" />
+
+    <TextView
+        android:id="@+id/characters_details_location_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:hint="@string/character_details_location_hint"
+        android:textAppearance="@style/TextAppearance.RickAndMortyApp.Subtitle1"
+        android:textColorHint="#546E7A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_name_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_location_caption" />
+
+    <TextView
+        android:id="@+id/characters_details_type_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:text="@string/character_details_type_caption"
+        android:textAppearance="@style/TextAppearance.RickAndMortyApp.Caption"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_location_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_location_text" />
+
+    <TextView
+        android:id="@+id/characters_details_type_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:hint="@string/character_details_type_hint"
+        android:textAppearance="@style/TextAppearance.RickAndMortyApp.Subtitle1"
+        android:textColorHint="#546E7A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_location_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_type_caption" />
+
+    <TextView
+        android:id="@+id/characters_details_status_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:text="@string/character_details_status_caption"
+        android:textAppearance="@style/TextAppearance.RickAndMortyApp.Caption"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_type_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_type_text" />
+
+    <TextView
+        android:id="@+id/characters_details_status_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:hint="@string/character_details_status_hint"
+        android:textAppearance="@style/TextAppearance.RickAndMortyApp.Subtitle1"
+        android:textColorHint="#546E7A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/characters_details_type_text"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_status_caption" />
+
+    <Button
+        android:id="@+id/characters_details_episodes_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:text="@string/character_details_episodes_button_caption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characters_details_status_text" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/characters_details_content_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        app:constraint_referenced_ids="characters_details_name_text,characters_details_name_caption,characters_details_episodes_button,characters_details_status_caption, characters_details_status_text,characters_details_image,characters_details_location_caption, characters_details_location_text,characters_details_type_caption, characters_details_type_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character_details_retry_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
